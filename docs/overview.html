@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Proposal &mdash; GPU Filter Bank  documentation</title>
+  <title>Team Members &mdash; GPU Filter Bank  documentation</title>
   
 
   
@@ -87,7 +87,10 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Proposal</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Team Members</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#proposal">Proposal</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#background">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#goals">Goals</a></li>
 </ul>
 
             
@@ -136,7 +139,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Proposal</li>
+      <li>Team Members</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -155,9 +158,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="tex2jax_ignore mathjax_ignore section" id="proposal">
+  <div class="tex2jax_ignore mathjax_ignore section" id="team-members">
+<h1>Team Members<a class="headerlink" href="#team-members" title="Permalink to this headline">¶</a></h1>
+<p>Dan Jacobellis</p>
+<p>Utsha Khondkar</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="proposal">
 <h1>Proposal<a class="headerlink" href="#proposal" title="Permalink to this headline">¶</a></h1>
-<p>The goal of our project is to implement a class of constant-Q filter banks on the GPU.</p>
+<p>The goal of our project is to develop and efficient and parallel implementation for a class of constant-q filterbanks. In particular, we plan to implement the <a class="reference external" href="https://doi.org/10.1109/TSP.2011.2143711">tunable q factor wavelet transform</a> on the GPU to facilitate it’s use in statistical learning problems.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="background">
+<h1>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h1>
 <p>For audio signal processing problems such as compression, denoising, and various types of pattern recognition, deep learning has taken over. For example, the search interest for “wavelet” has followed the opposite trajectory as “convolutional neural network”</p>
 <p><img alt="" src="_images/trends1.svg" /></p>
 <p>A current trend of audio signal processing research is to apply 2D convolutional neural networks to time-frequency representations of audio. Although great progress was made in the pre-deep learning era on perfect reconstruction filterbanks and wavelet transforms, most of the algorithms and techniques have been abandoned by practitioners of deep learning because no standardized and free implementations were ever widely disseminated. As a result, the standarized set of triangular “Mel” filterbanks dating back nearly 50 years appears to have remained the dominant tool, and have even seen a resurgance despite their <a class="reference external" href="https://asmp-eurasipjournals.springeropen.com/articles/10.1186/s13636-021-00217-4">impending obsolescence.</a></p>
@@ -170,7 +181,10 @@
 <li><p>Generalization to multiple channels/phased arrays</p></li>
 <li><p>Efficient implementation for oversampled representations.</p></li>
 </ul>
-<p>In our project, we want explore techniques which offer the same constant-Q spectral decomposition but which address these shortcomings. Specifically, we plan to implement a class of filterbanks introduced in 2011 called the <a class="reference external" href="https://www.mathworks.com/help/wavelet/ref/tqwt.html">Tunable Q-factor Wavelet Transform</a>. A resurgence in use of this method is likely to occur due to it’s [recent introduction to MATLAB][3]. It’s our hope that a freely available, modern GPU implementation would significantly relieve that debt that has accumulated by using older methods, and would provide a great opportunity to learn about parallel algorithms in signal processing.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="goals">
+<h1>Goals<a class="headerlink" href="#goals" title="Permalink to this headline">¶</a></h1>
+<p>In our project, we want explore techniques which offer the same constant-Q spectral decomposition but which address these shortcomings. Specifically, we plan to implement a class of filterbanks introduced in 2011 called the <a class="reference external" href="https://doi.org/10.1109/TSP.2011.2143711">Tunable Q-factor Wavelet Transform</a>. A resurgence in use of this method is likely to occur due to it’s <a class="reference external" href="https://www.mathworks.com/help/wavelet/ref/tqwt.html">recent introduction to MATLAB</a>. It’s our hope that a freely available, modern GPU implementation would significantly relieve that debt that has accumulated by using older methods, and would provide a great opportunity to learn about parallel algorithms in signal processing.</p>
 </div>
 
 
