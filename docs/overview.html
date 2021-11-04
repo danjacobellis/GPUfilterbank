@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
+  <link rel="stylesheet" href="_static/mystnb.css" type="text/css" />
 
   
   
@@ -35,13 +37,15 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Dyadic Filterbanks" href="dyadic.html" />
+    <link rel="next" title="Progress Report" href="progress_report.html" />
     <link rel="prev" title="Contents" href="index.html" /> 
 </head>
 
@@ -88,11 +92,16 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Team Members</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#proposal">Proposal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#background">Background</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#goals">Goals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dyadic.html">Dyadic Filterbanks</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Team Members</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#proposal">Proposal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#progress-report">Progress Report</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#background">Background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#goals">Goals</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="progress_report.html">Progress Report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dyadic.html">Dyadic Filter Banks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timing.html">Timing</a></li>
 </ul>
 
             
@@ -164,13 +173,16 @@
 <h1>Team Members<a class="headerlink" href="#team-members" title="Permalink to this headline">¶</a></h1>
 <p>Dan Jacobellis</p>
 <p>Utsha Khondkar</p>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="proposal">
-<h1>Proposal<a class="headerlink" href="#proposal" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="proposal">
+<h2>Proposal<a class="headerlink" href="#proposal" title="Permalink to this headline">¶</a></h2>
 <p>The goal of our project is to develop and efficient and parallel implementation for a class of constant-q filterbanks. In particular, we plan to implement the <a class="reference external" href="https://doi.org/10.1109/TSP.2011.2143711">tunable q factor wavelet transform</a> on the GPU to facilitate it’s use in statistical learning problems.</p>
 </div>
-<div class="tex2jax_ignore mathjax_ignore section" id="background">
-<h1>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="progress-report">
+<h2>Progress Report<a class="headerlink" href="#progress-report" title="Permalink to this headline">¶</a></h2>
+<p>The remaining sections on this page contain our original project proposal. Please see the <a class="reference internal" href="progress_report.html"><span class="doc std std-doc">progress report for the week of November 1</span></a></p>
+</div>
+<div class="section" id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">¶</a></h2>
 <p>For audio signal processing problems such as compression, denoising, and various types of pattern recognition, deep learning has taken over. For example, the search interest for “wavelet” has followed the opposite trajectory as “convolutional neural network”</p>
 <p><img alt="" src="_images/trends1.svg" /></p>
 <p>A current trend of audio signal processing research is to apply 2D convolutional neural networks to time-frequency representations of audio. Although great progress was made in the pre-deep learning era on perfect reconstruction filterbanks and wavelet transforms, most of the algorithms and techniques have been abandoned by practitioners of deep learning because no standardized and free implementations were ever widely disseminated. As a result, the standarized set of triangular “Mel” filterbanks dating back nearly 50 years appears to have remained the dominant tool, and have even seen a resurgance despite their <a class="reference external" href="https://asmp-eurasipjournals.springeropen.com/articles/10.1186/s13636-021-00217-4">impending obsolescence.</a></p>
@@ -184,9 +196,10 @@
 <li><p>Efficient implementation for oversampled representations.</p></li>
 </ul>
 </div>
-<div class="tex2jax_ignore mathjax_ignore section" id="goals">
-<h1>Goals<a class="headerlink" href="#goals" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="goals">
+<h2>Goals<a class="headerlink" href="#goals" title="Permalink to this headline">¶</a></h2>
 <p>In our project, we want explore techniques which offer the same constant-Q spectral decomposition but which address these shortcomings. Specifically, we plan to implement a class of filterbanks introduced in 2011 called the <a class="reference external" href="https://doi.org/10.1109/TSP.2011.2143711">Tunable Q-factor Wavelet Transform</a>. A resurgence in use of this method is likely to occur due to it’s <a class="reference external" href="https://www.mathworks.com/help/wavelet/ref/tqwt.html">recent introduction to MATLAB</a>. It’s our hope that a freely available, modern GPU implementation would significantly relieve that debt that has accumulated by using older methods, and would provide a great opportunity to learn about parallel algorithms in signal processing.</p>
+</div>
 </div>
 
 
@@ -195,7 +208,7 @@
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="dyadic.html" class="btn btn-neutral float-right" title="Dyadic Filterbanks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="progress_report.html" class="btn btn-neutral float-right" title="Progress Report" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="index.html" class="btn btn-neutral float-left" title="Contents" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
