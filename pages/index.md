@@ -2,8 +2,6 @@
 ```{toctree}
 ---
 ---
-overview
-progress_report
 dyadic
-timing
+denoise
 ```
