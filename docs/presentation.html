@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Demo &mdash; GPU Filter Bank  documentation</title>
+  <title>Presentation &mdash; GPU Filter Bank  documentation</title>
   
 
   
@@ -97,7 +97,10 @@
 <li class="toctree-l1"><a class="reference internal" href="dyadic.html">Semi-Constant-Q Dyadic Filter Bank</a></li>
 <li class="toctree-l1"><a class="reference internal" href="denoise.html">Denoising Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="timing.html">Timing</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Demo</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Presentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#demo">Demo</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -146,7 +149,7 @@
     
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Demo</li>
+      <li>Presentation</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -165,7 +168,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="cell docutils container">
+  <div class="tex2jax_ignore mathjax_ignore section" id="presentation">
+<h1>Presentation<a class="headerlink" href="#presentation" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight- notranslate"><div class="highlight"><pre><span></span>using FFTW
 using LinearAlgebra
@@ -206,7 +211,7 @@ heatmap([real(X) imag(X)], axis=nothing, colorbar=nothing,size=(800,400))
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/presentation_4_0.svg" src="_images/presentation_4_0.svg" /></div>
+<img alt="_images/presentation_5_0.svg" src="_images/presentation_5_0.svg" /></div>
 </div>
 <ul class="simple">
 <li><p>Introduce team</p></li>
@@ -438,9 +443,10 @@ This matches with the derived complexity of our algorithm, as scaling input by 1
 <p>(compared to Mel Filter Banks using Librosa + numpy)</p>
 <p><img alt="" src="_images/speedup.svg" /></p>
 <p>Next, we compared our algorithm with Librosa, which is a widely-used audio processing library. It’s algorithm is not optimized for similar task, and as Dan explained earlier it uses non reconstractbale filters so it does some unnecessary operations (like Griffinlim). We can clearly see speedup, up to about 200 times. This is a big deal, because when people use filterbank as a preprocessing for large scale dataset for deep learning, because some datasets have 100s of 1000s of hours, the waiting time for preprocessing will be dramatically reduced.</p>
-<div class="tex2jax_ignore mathjax_ignore section" id="demo">
-<h1>Demo<a class="headerlink" href="#demo" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="demo">
+<h2>Demo<a class="headerlink" href="#demo" title="Permalink to this headline">¶</a></h2>
 <p>https://danjacobellis.github.io/GPUfilterbank/</p>
+</div>
 </div>
 
 
