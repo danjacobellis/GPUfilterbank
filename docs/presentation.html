@@ -1,0 +1,493 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Demo &mdash; GPU Filter Bank  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/togglebutton.css" type="text/css" />
+  <link rel="stylesheet" href="_static/mystnb.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Timing" href="timing.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> GPU Filter Bank
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="GPUFilterBanks.html">CUDA Implementation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dyadic.html">Semi-Constant-Q Dyadic Filter Bank</a></li>
+<li class="toctree-l1"><a class="reference internal" href="denoise.html">Denoising Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="timing.html">Timing</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Demo</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GPU Filter Bank</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Demo</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/presentation.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight- notranslate"><div class="highlight"><pre><span></span>using FFTW
+using LinearAlgebra
+using Plots
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight- notranslate"><div class="highlight"><pre><span></span>cmd = `jupyter-nbconvert presentation.ipynb --to slides --TagRemovePreprocessor.remove_input_tags=\{\&quot;remove_input\&quot;\} --post serve --ServePostProcessor.port=9997 --ServePostProcessor.ip=\&quot;0.0.0.0\&quot;`
+run(cmd);
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Serving your slides at http://0.0.0.0:9997/presentation.slides.html
+Use Control-C to stop this server
+
+Interrupted
+</pre></div>
+</div>
+</div>
+</div>
+<p>To render slides, interrupt the above cell (esc + I), then rerun it.</p>
+<p>Slides are rendered to</p>
+<p>http://72.179.3.141:9997/presentation.slides.html</p>
+<p>For pdf version:</p>
+<p>http://72.179.3.141:9997/presentation.slides.html?print-pdf</p>
+<center><h1>GPU Filter Banks for Audio</h1></center>
+<center><h2>Dan Jacobellis<br>Utsha Khondkar</h2></center>
+<p><img alt="" src="_images/fft_matrix.svg" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight- notranslate"><div class="highlight"><pre><span></span>X = fft(Matrix(1.0I,32,32), 1);
+heatmap([real(X) imag(X)], axis=nothing, colorbar=nothing,size=(800,400))
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/presentation_4_0.svg" src="_images/presentation_4_0.svg" /></div>
+</div>
+<ul class="simple">
+<li><p>Introduce team</p></li>
+</ul>
+<p>Our project is on adapting filter banks which are used in audio applications to the GPU.</p>
+<p>You might not be familiar with the terminology “filter bank”. But, you’ve probably seen a filter bank before, it just might have been called something else.</p>
+<p>For example, the fast fourier transform, the FFT, can be considered a a type of filter bank. In fact this picture right here is actually showing the filter coefficients that you could use to perform a discrete fourier transform.</p>
+<center>
+<p><img width="375" src="img/asymmetric_analysis.svg"/><img width="417" src="img/asymmetric_synthesis.svg" /></p>
+<p><img width="400" src="img/symmetric_analysis.svg"/><img width="400" src="img/symmetric_synthesis.svg" /></p>
+</center><center><h1>Time-Frequency Analysis</h1></center><video width="800" height="400" controls src="img/chirp.mp4" /><p>Filter banks are the primary tool of time-frequency analysis, and time-frequency analysis is the primary tool of audio signal processing.</p>
+<p>In practice, most audio signals are difficult to deal with in the time domain.</p>
+<p>Sometimes, we can get away with just taking a Fourier transform to put it into the frequency domain.</p>
+<p>Usually, the most useful representation is somewhere in between.</p>
+<p>As an example, let’s listen to this bird chirp</p>
+<p>Now, let’s look at it in the time domain, the frequency domain, and as a joint time-frequency representation.</p>
+<center><h1>Time-Frequency Analysis</h1></center>
+<p><img alt="" src="_images/chirp.svg" /></p>
+<p>If we were to just look at it in the time domain, we might have some idea about when these chirps occur or how loud they are.</p>
+<p>If we were were to just look at it in the frequency domain, we would have some idea of what frequencies are present, but not necessarily when they occur or how they change.</p>
+<p>The joint representation is where most of the interesting problems are solved.</p>
+<p>For example, it’s easy to see, for the chirp, where the signal is and where the noise is.</p>
+<p>In the time or frequency domains, the signal is everywhere. In the time-frequency domain, the signal occupies a relatively small area.</p>
+<p>Our auditory systems exploit this. The anatomy of our inner ears are actually performing a type of time-frequency analysis.</p>
+<p>The current approaches to machine learning for audio start by constructing some sort of time-frequency representation like this.</p>
+<p>The question is: what is the best way to construct these things, and how do we do it efficiently in parallel?</p>
+<center><h1>Filter Banks</h1></center>
+<p><img alt="" src="_images/helmholtz.png" /></p>
+<p>The basic tool to construct a time-frequency distribution is the filter bank.</p>
+<p>We just take a bunch of filters which each respond to a narrow range of frequencies, and run the signal through each of the filters in parallel.</p>
+<p>This idea has been around for a long time.</p>
+<p>This is one of the first analog filter banks which used these things called helmholtz resonators which behave as a bandpass filter. This was created by Hemlholtz who was one of the pioneers in audio signal processing, even if we didn’t call it ‘signal processing’ back then.</p>
+<p>Now, we use digital filters, which are applied using discrete convolution.</p>
+<p>As you probably know, GPUs are really good at doing convolution.</p>
+<p>But for whatever reason, most people only ever use one type of filterbank because it’s easy and there’s lots of accessible software to do it. That’s the FFT.</p>
+<center><h1>FFT as a filter bank</h1></center>
+<center>
+<img width="500" src="img/uniform_tile.png" />
+</center><p>The image I showed earlier was made using an FFT. Even though the FFT takes a signal from the time domain and puts it into the frequency domain, we can use it to make a joint representation.</p>
+<p>All we have to do is take short windows of the signal and apply the FFT to each window. When you do that, you’re basically tiling the time-frequency plane like this</p>
+<p>The problem with this representation is that the frequency bands are uniformly spaced. For a lot of tasks, we really want a constant-Q spacing</p>
+<center><h1>Constant-Q</h1></center>
+<div class="math notranslate nohighlight">
+\[ Q = \frac{\text{center frequency}}{\text{bandwidth}} \]</div>
+<center><img width="500" src="img/cq_tiling.png"/></center><p>A Constant Q representation divides the frequency axis so that each frequency band has the same Q factor.</p>
+<p>The Q factor is just the ratio of the center frequency to bandwidth.</p>
+<p>In this example, The Q factor is chosen so that each of these frequency bands is an octave.</p>
+<p>For signals like speech or music which are for human consumption, this type of representation is preferred because it matches our perception. We have better ability to discriminate small differences of frequency when the frequencies are low. But at the same time, we have a better ability to track changes over time when the frequencies are high.</p>
+<center><h1>Wavelets</h1></center>
+<img width="800" src="img/trends1.svg"/> <p>These types of transforms can be achieved using something called a discrete wavelet transform, which is really just a type of filterbank.</p>
+<p>However, deep learning has displaced most of the study of wavelets, and people stopped writing software and algorithms for them.</p>
+<p>Even though they’ve been around for a long time, doing discrete wavelet transforms on the GPU is a pretty arcane task.</p>
+<center><h1>Mel Filter Banks</h1></center>
+<img width="800" src="img/trends2.svg"/> <p>Since audio signal processing is a very interdisciplinary field, and people don’t have time to become an expert on discrete wavelet transforms and filter banks, most people end up using something called a mel filterbank to do these constant q transforms.</p>
+<center><h1>What's wrong with FFTs and Mel Filters?</h1></center>
+<p>Missing:</p>
+<ul class="simple">
+<li><p>Parameterization/tunability</p></li>
+<li><p>Perfect reconstruction</p></li>
+<li><p>Meaningful/interpretable phase representation</p></li>
+<li><p>Generalization to multiple channels/phased arrays</p></li>
+<li><p>Efficient implementation for oversampled representations.</p></li>
+</ul>
+<p>We’ve implemented an efficient algorithm on the GPU that can address some of these problems. I’ll hand it off to Utsha to go through the algorithm.</p>
+<center><h1>Haar Decomposition</h1></center>
+<center><img src="img/Haar_analysis.svg"/></center><center><h1>Haar Decomposition</h1></center><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight- notranslate"><div class="highlight"><pre><span></span>x = round.(Int,10*randn(8));
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight- notranslate"><div class="highlight"><pre><span></span>print(x)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[7, 1, -13, 20, 4, 7, -18, 5]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight- notranslate"><div class="highlight"><pre><span></span>s = conv(x,[1, 1])[2:2:end];
+d = conv(x,[1,-1])[2:2:end];
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight- notranslate"><div class="highlight"><pre><span></span>println(&quot;s = &quot;,s); print(&quot;d = &quot;,d)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>s = [8, 7, 11, -13]
+d = [-6, 33, 3, 23]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight- notranslate"><div class="highlight"><pre><span></span>y1 = (s-d)/2;
+y2 = (s+d)/2;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight- notranslate"><div class="highlight"><pre><span></span>println(Int.(y1)); print(Int.(y2))
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[7, -13, 4, -18]
+[1, 20, 7, 5]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Our algorithm is very similar to the discrete wavelet transform, so we will go through a simple example to demonstrate what that is.</p>
+<p>This example shows what is likely the simplest type of perfect reconstruction filter bank.</p>
+<p>For simplicity, we’ve taken the input samples to be integers it works with any type of signal.</p>
+<p>We apply two filters using convolution. One filter is low-pass and the other is high pass.</p>
+<p>You can see that the sum and difference not only decompose the signal into high and low frequency components, but they do so without increasing the number of words required to represent the signal.</p>
+<p>This is an example of “critically sampled” dyadic filterbank. Critically sampled means that the size of data after applying the filter bank is exactly same as original data, and no information is lost. “Dyadic” just refers to the fact that there are two filters in the filter bank.</p>
+<p>We call the first part an analysis filterbank, since it is decomposing a 1-d signal into multiple frequency bands.</p>
+<p>We call the reverse operation a synthesis filterbank since it reconstructs the 1-d signal from the frequency bands.</p>
+<p>In this example, we end up with two signals that have half the time resolution. But, we went from having only one frequeny band to two, so we have doubled our frequency resolution.</p>
+<center><h1>Convolution</h1></center>
+<p>(almost) embarrassingly parallel</p>
+<p>Dot product requires <span class="math notranslate nohighlight">\(\log_2(M)\)</span> time steps</p>
+<p><span class="math notranslate nohighlight">\( y = x \ast h = 
+\begin{bmatrix}
+    x_1 &amp; 0 &amp; \cdots &amp; 0 &amp; 0 \\
+    x_2 &amp; x_1 &amp;      &amp; \vdots &amp; \vdots \\
+    x_3 &amp; x_2 &amp; \cdots &amp; 0 &amp; 0 \\
+    \vdots &amp; x_3 &amp; \cdots &amp; x_1 &amp; 0 \\
+    x_{n-1} &amp; \vdots &amp; \ddots &amp; x_2 &amp; x_1 \\
+    x_n &amp; x_{n-1} &amp;      &amp; \vdots &amp; x_2 \\
+    0 &amp; x_n &amp; \ddots &amp; x_{n-2} &amp; \vdots \\
+    0 &amp; 0 &amp; \cdots &amp; x_{n-1} &amp; x_{n-2} \\
+    \vdots &amp; \vdots &amp;        &amp; x_n &amp; x_{n-1} \\
+    0 &amp; 0 &amp; 0 &amp; \cdots &amp; x_n
+\end{bmatrix}
+\)</span>
+<span class="math notranslate nohighlight">\(\begin{bmatrix}
+    0 \\
+    0 \\
+    \vdots\\
+    h_1 \\
+    h_2 \\
+    \vdots \\
+    h_m \\
+    0 \\
+    \vdots \\
+    0 \\
+\end{bmatrix}\)</span></p>
+<p>All of these operations can be described in terms of convolution, upsampling, and downsampling.</p>
+<p>Often, people think about using FFTs to perform “fast” convolution. However, that is only true assuming that the filter is similar in size to the signal, which is not true in our case.</p>
+<p>Either way, the algorithm is almost embarrassingly parallel.</p>
+<p>The only sequential component is that we have to add up a list of numbers in order to calculate a dot product, but this part can be completed in log M time steps</p>
+<center><h1>Tree structure</h1></center>
+<!-- ![](img/dyadic_analysis_filterbank.svg) -->
+<img width="625" src="img/asymmetric_analysis.svg"/> 
+<img width="700" src="img/asymmetric_synthesis.svg"/> <p><img alt="" src="_images/symmetric_analysis.svg" /></p>
+<p><img alt="" src="_images/symmetric_synthesis.svg" /></p>
+<p>The Haar decomposition shown eariler was just one filter bank. But why should we stop there?</p>
+<p>We can recursively apply this procedure to the outputs of each filter to increase the frequency resolution. Since each step in the decomposition can be inverted, so can the entire process.</p>
+<p>We apply the highpass, then downsample, the lowpass, then downsample, then recurse.</p>
+<p>The output <span class="math notranslate nohighlight">\(y\)</span> is the time-frequency distribution which has useful properties for many signal analysis problems, such as compression, denoising, or machine learning.</p>
+<center><h1>Time-frequency Tiling</h1></center>
+<p><img width="400" src="img/uniform_tile.png"/><img width="331" src="img/cq_tiling.png" /></p>
+<p>If we recursively apply this procedure, we refine the time-frequency tiling of our representation.</p>
+<p>Depending on how we structure the tree, we can either get a uniform tiling (similar to STFT), or a constant-Q tiling.</p>
+<p>The structure on the left has a simple convenient data structure: we can represent each tile as the element of a matrix.</p>
+<p>The structure on the right is often a better representation of the underlying signal structure, and provides good time resolution at the places we need and good frequency resolution in the places we need.</p>
+<p>What if we could have the best of both worlds?</p>
+<p>That’s exactly what we did!</p>
+<center><h1>Hybrid Octave + Uniform</h1></center>
+<p>Input:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span><span class="o">-</span><span class="n">element</span> <span class="n">Vector</span><span class="p">{</span><span class="n">NTuple</span><span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="n">Int64</span><span class="p">}}:</span>
+ <span class="p">(</span><span class="mi">524288</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<p>Output of analysis filter banks:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">11</span><span class="o">-</span><span class="n">element</span> <span class="n">Vector</span><span class="p">{</span><span class="n">NTuple</span><span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="n">Int64</span><span class="p">}}:</span>
+ <span class="p">(</span><span class="mi">8192</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+ <span class="p">(</span><span class="mi">4096</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+ <span class="p">(</span><span class="mi">2048</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+ <span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+ <span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+ <span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+ <span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+ <span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+ <span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+ <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+ <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Takes <span class="math notranslate nohighlight">\(O \left( \log_2(N) \right)\)</span> recursive applications of the filter bank</p>
+<p>Each application requires a convolution which is <span class="math notranslate nohighlight">\(O \left( \log_2(M) \right)\)</span> (assuming <span class="math notranslate nohighlight">\(p=NM\)</span>)</p>
+<p>In our algorithm, we recursively apply analysis filters to decompose the low frequency band until we have 10 octaves of resolution (plus a DC band)</p>
+<p>Then for each octave, we recursively apply the analysis filters but now we decompose both the low-frequency and high-frequency components.</p>
+<p>Exploit highly optimized filtering operations in CUDA to make each convolution <span class="math notranslate nohighlight">\(O(log M)\)</span></p>
+<p>We also implemented the corresponding synthesis filterbank.</p>
+<center><h1>Memory Considerations</h1></center>
+<ul class="simple">
+<li><p>Speech: few seconds long, fs = 16000, N ~ <span class="math notranslate nohighlight">\(10^5\)</span> per record.</p></li>
+<li><p>Music: minutes long, two channels, fs = 48000, N ~ <span class="math notranslate nohighlight">\(10^7\)</span> per record.</p></li>
+<li><p>Passive sonar array: 100s of channels, fs in the kHz, N ~ <span class="math notranslate nohighlight">\(10^{10}\)</span> per hour.</p></li>
+</ul>
+<p>Ideally, <span class="math notranslate nohighlight">\(p=NM\)</span></p>
+<p>Not realistic. Often limited by ability of CPU/data storage to feed data to GPU.</p>
+<p>Make <span class="math notranslate nohighlight">\(p\)</span> a large as possible while keeping a constant stream of data.</p>
+<p>Although we assume infinite parallel cores in theory, in real life we should consider realistic GPU memory. Especially, the software’s speed depends on GPU memory, and transfer speed between CPU and GPU.</p>
+<center><h1>Results</h1></center>
+<p><img alt="" src="_images/timing1.svg" /></p>
+<p>We tested how our algorithm scales with different data size, from about one second of music to one hour of film.
+This matches with the derived complexity of our algorithm, as scaling input by 10^4 times takes 10^2 time. We can also see that the analysis filter and synthesis filter scales in exactly same way. Synthesis, or the invert operation takes slightly longer because it has addition terms.</p>
+<center><h1>Speedup</h1></center>
+<p>(compared to Mel Filter Banks using Librosa + numpy)</p>
+<p><img alt="" src="_images/speedup.svg" /></p>
+<p>Next, we compared our algorithm with Librosa, which is a widely-used audio processing library. It’s algorithm is not optimized for similar task, and as Dan explained earlier it uses non reconstractbale filters so it does some unnecessary operations (like Griffinlim). We can clearly see speedup, up to about 200 times. This is a big deal, because when people use filterbank as a preprocessing for large scale dataset for deep learning, because some datasets have 100s of 1000s of hours, the waiting time for preprocessing will be dramatically reduced.</p>
+<div class="tex2jax_ignore mathjax_ignore section" id="demo">
+<h1>Demo<a class="headerlink" href="#demo" title="Permalink to this headline">¶</a></h1>
+<p>https://danjacobellis.github.io/GPUfilterbank/</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="timing.html" class="btn btn-neutral float-left" title="Timing" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
